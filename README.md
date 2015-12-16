@@ -7,13 +7,13 @@ Also check out a [blog post](https://developer.ibm.com/bluemix/2015/10/28/gettin
 
 ## Build Status
 
-[![Build Status](https://travis-ci.org/IBM-Bluemix/go-hello-world.svg?branch=master)](https://travis-ci.org/IBM-Bluemix/go-hello-world) ![Bluemix Deployments](https://deployment-tracker.mybluemix.net/stats/ec4f40db88c2905bab56e7d183b46d53/badge.svg)
+[![Build Status](https://api.travis-ci.org/jsloyer/go-cloudant.svg?branch=master)](https://travis-ci.org/jsloyer/go-cloudant)
 
 ## Running the app on Bluemix
 
 You can deploy your own instance of Go Hello World app to Bluemix. To do this, you can either use the _Deploy to Bluemix_ button for an automated deployment or follow the step below to create and deploy your app manually.
 
-[![Deploy to Bluemix](https://deployment-tracker.mybluemix.net/stats/ec4f40db88c2905bab56e7d183b46d53/button.svg)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/go-hello-world.git)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy)
 
 1. [Install Go][go_install_url].  If you have Go installed skip to step 2.
 
