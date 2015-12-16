@@ -20,6 +20,8 @@ func main() {
 		ID    string `json:_id,omitempty"`
 	}
 
+	dbName := "go-cloudant"
+
 	//remove the following line to not have your deployment tracker
 	cf_deployment_tracker.Track()
 
@@ -43,13 +45,17 @@ func main() {
 
 	cloudantUrl, _ := cloudantService.Credentials["url"].(string)
 
-	c, err := couchdb.NewClient(cloudantUrl, nil)
+	cloudant, err := couchdb.NewClient(cloudantUrl, nil)
 	if err != nil {
 		log.Println(err)
 	}
 
+	//ensure db exists
+	//if the db exists the db will be returned anyway
+	cloudant.CreateDB(dbName)
+
 	var doc Note
-	if err := c.DB("go-cloudant-dev").Get("doc", &doc, nil); err != nil {
+	if err := cloudant.DB(dbName).Get("doc", &doc, nil); err != nil {
 		log.Println(err)
 	}
 	if doc == (Note{}) {
