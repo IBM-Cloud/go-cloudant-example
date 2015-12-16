@@ -103,7 +103,7 @@ func main() {
 		}
 	})
 
-	port := os.Getenv("VCAP_APP_PORT")
+	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
