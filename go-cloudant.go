@@ -20,6 +20,12 @@ func main() {
 		ID    string `json:_id,omitempty"`
 	}
 
+	type alldocsResult struct {
+		TotalRows int `json:"total_rows"`
+		Offset    int
+		Rows      []map[string]interface{}
+	}
+
 	dbName := "go-cloudant"
 
 	//remove the following line to not have your deployment tracker
@@ -27,6 +33,7 @@ func main() {
 
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*")
+	router.Static("/public", "./public")
 
 	err := godotenv.Load()
 	if err != nil {
@@ -54,7 +61,14 @@ func main() {
 	//if the db exists the db will be returned anyway
 	cloudant.CreateDB(dbName)
 
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.tmpl", gin.H{
+			"title": "Main website",
+		})
+	})
+
 	var doc Note
+
 	if err := cloudant.DB(dbName).Get("doc", &doc, nil); err != nil {
 		log.Println(err)
 	}
@@ -62,16 +76,17 @@ func main() {
 		log.Println("nil")
 	}
 
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{
-			"title": "Main website",
-		})
-	})
-
 	router.GET("/hi", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "hi",
-		})
+		var result alldocsResult
+
+		err := cloudant.DB(dbName).AllDocs(&result, nil)
+		if err != nil {
+			log.Println(err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to fetch docs"})
+		} else {
+			c.JSON(200, result)
+		}
+
 	})
 
 	port := os.Getenv("VCAP_APP_PORT")

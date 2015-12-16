@@ -1,0 +1,13 @@
+{
+  "name": "go-cloudant",
+  "version": "1.0.0",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "public/vendor"
+  ],
+  "dependencies": {
+    "bootstrap": "*",
+    "jquery": "*"
+  }
+}

@@ -26,3 +26,6 @@ _testmain.go
 app
 go-cloudant
 .env
+
+
+public/vendor
