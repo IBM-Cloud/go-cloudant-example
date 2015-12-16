@@ -7,6 +7,7 @@ import (
 	"github.com/fjl/go-couchdb"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/pborman/uuid"
 	"log"
 	"net/http"
 	"os"
@@ -15,9 +16,8 @@ import (
 func main() {
 
 	type Note struct {
-		Rev   string `json:"_rev,omitempty"`
-		Field int64  `json:"field"`
-		ID    string `json:_id,omitempty"`
+		Rev  string `json:"_rev,omitempty"`
+		Note string `form:"note" json:"note" binding:"required"`
 	}
 
 	type alldocsResult struct {
@@ -63,7 +63,7 @@ func main() {
 
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
-			"title": "Main website",
+			"title": "Example multi-data center app",
 		})
 	})
 
@@ -87,6 +87,20 @@ func main() {
 			c.JSON(200, result)
 		}
 
+	})
+
+	router.POST("/submit", func(c *gin.Context) {
+		var form Note
+		// This will infer what binder to use depending on the content-type header.
+		if c.Bind(&form) == nil {
+
+			id := uuid.New()
+			_, err := cloudant.DB(dbName).Put(id, form, "")
+			if err != nil {
+				log.Println(err)
+			}
+			c.String(http.StatusOK, "Submitted note")
+		}
 	})
 
 	port := os.Getenv("VCAP_APP_PORT")

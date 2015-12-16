@@ -3,11 +3,20 @@
         <link rel="stylesheet" href="/public/vendor/bootstrap/dist/css/bootstrap.min.css" />
     </head>
     <body>
-        <h1>
-            {{ .title }}
-        </h1>
+        <div class="container">
+            <h1>
+                {{ .title }}
+            </h1>
+            <form action="/submit" method="post">
+              <div class="input-group">
+                    <input type="text" name="note" class="form-control" placeholder="Note" aria-describedby="sizing-addon2">
+                </div>
+              <input type="submit" value="Submit" class="btn btn-default">
+            </form>
+        </div>
         <script src="/public/vendor/jquery/dist/jquery.min.js" type="text/javascript"> </script>
         <script src="/public/vendor/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"> </script>
+        <script src="/public/script.js" type="text/javascript"> </script>
     </body>
 
 </html>

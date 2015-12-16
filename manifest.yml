@@ -8,8 +8,8 @@ applications:
   memory: 128M
   instances: 1
   domain: mybluemix.net
-  name: go-crud
-  host: go-crud
+  name: go-cloudant
+  host: go-cloudant
   disk_quota: 1024M
   command: go-hello-world
   buildpack: https://github.com/cloudfoundry/go-buildpack.git
