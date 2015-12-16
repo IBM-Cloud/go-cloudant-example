@@ -11,7 +11,7 @@ prepare:
 
 build: prepare
 	godep go build
-	bower install
+	#bower install
 
 test: prepare build
 	echo "no tests"
