@@ -1,3 +1,8 @@
+---
+declared-services:
+  cloudant-go-cloudan:
+    label: cloudantNoSQLDB
+    plan: Shared
 applications:
 - path: .
   memory: 128M
@@ -8,3 +13,5 @@ applications:
   disk_quota: 1024M
   command: go-hello-world
   buildpack: https://github.com/cloudfoundry/go-buildpack.git
+  services:
+  - cloudant-go-cloudant
