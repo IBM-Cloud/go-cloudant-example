@@ -1,1 +1,1 @@
-worker: go-hello-world
+worker: go-cloudant

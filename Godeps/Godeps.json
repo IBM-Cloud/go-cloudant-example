@@ -1,5 +1,5 @@
 {
-	"ImportPath": "go-hello-world",
+	"ImportPath": "go-cloudant",
 	"GoVersion": "go1.5.1",
 	"Deps": [
 		{
@@ -7,9 +7,23 @@
 			"Rev": "580644454e98381d96dd747b4c1370d1d21a9950"
 		},
 		{
+			"ImportPath": "github.com/cloudfoundry-community/go-cfenv",
+			"Comment": "v1.12",
+			"Rev": "c682e189b94b0b2ec6edf12363df2eecf29d7256"
+		},
+		{
+			"ImportPath": "github.com/fjl/go-couchdb",
+			"Rev": "1f327c218d24c98ba4067e086a2787c1488ba558"
+		},
+		{
 			"ImportPath": "github.com/gin-gonic/gin",
 			"Comment": "v1.0rc1-148-g52fcc5d",
 			"Rev": "52fcc5dbf6e94df33ad313858fb94b713e9d1b4a"
+		},
+		{
+			"ImportPath": "github.com/joho/godotenv",
+			"Comment": "v1-10-g4ed1339",
+			"Rev": "4ed13390c0acd2ff4e371e64d8b97c8954138243"
 		},
 		{
 			"ImportPath": "github.com/manucorporat/sse",
@@ -18,6 +32,10 @@
 		{
 			"ImportPath": "github.com/mattn/go-colorable",
 			"Rev": "40e4aedc8fabf8c23e040057540867186712faa5"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/mapstructure",
+			"Rev": "281073eb9eb092240d33ef253c404f1cca550309"
 		},
 		{
 			"ImportPath": "github.com/parnurzeal/gorequest",

@@ -1,7 +1,7 @@
 all: test
 
 clean:
-	rm -f go-hello-world
+	rm -f go-cloudant
 
 install: prepare
 	godep go install
