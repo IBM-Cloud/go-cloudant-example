@@ -1,6 +1,6 @@
 ---
 declared-services:
-  cloudant-go-cloudan:
+  cloudant-go-cloudant:
     label: cloudantNoSQLDB
     plan: Shared
 applications:
