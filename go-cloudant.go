@@ -76,7 +76,7 @@ func main() {
 		log.Println("nil")
 	}
 
-	router.GET("/hi", func(c *gin.Context) {
+	router.GET("/all", func(c *gin.Context) {
 		var result alldocsResult
 
 		err := cloudant.DB(dbName).AllDocs(&result, nil)
