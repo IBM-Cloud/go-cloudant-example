@@ -11,7 +11,7 @@ applications:
   name: go-cloudant
   host: go-cloudant
   disk_quota: 1024M
-  command: go-hello-world
+  command: go-cloudant
   buildpack: https://github.com/cloudfoundry/go-buildpack.git
   services:
   - cloudant-go-cloudant
