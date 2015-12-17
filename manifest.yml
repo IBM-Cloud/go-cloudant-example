@@ -7,7 +7,7 @@ applications:
 - path: .
   memory: 128M
   instances: 1
-  domain: mybluemix.net
+  domain: demos.jeffsloyer.io
   name: go-cloudant
   host: go-cloudant
   disk_quota: 1024M
