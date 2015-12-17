@@ -103,6 +103,11 @@ func main() {
 		}
 	})
 
+	//fix for gin not serving HEAD
+	router.HEAD("/", func(c *gin.Context) {
+		c.String(200, "pong")
+	})
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
