@@ -2,6 +2,8 @@ language: go
 go:
 - '1.5'
 sudo: true
+dist: precise
+group: edge
 env:
   global:
   - CF_APP=go-cloudant
