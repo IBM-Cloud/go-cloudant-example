@@ -7,10 +7,10 @@ install: prepare
 	godep go install
 
 prepare:
+	bower install --config.interactive=false --allow-root
 	go get github.com/tools/godep
 
 build: prepare
-	bower install
 	godep go build
 
 test: prepare build
