@@ -10,8 +10,8 @@ prepare:
 	go get github.com/tools/godep
 
 build: prepare
-	godep go build
 	bower install
+	godep go build
 
 test: prepare build
 	echo "no tests"
