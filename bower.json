@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "ignore": [
-    "**/.*",
-    "public/vendor"
+    "./public/vendor"
   ],
   "dependencies": {
     "bootstrap": "*",
