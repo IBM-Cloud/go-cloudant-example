@@ -13,6 +13,19 @@ import (
 	"os"
 )
 
+func SetBluemixRegion(appEnv *cfenv.App) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		routes := ""
+		for _, route := range appEnv.ApplicationURIs {
+			routes += route + ","
+		}
+		c.Header("Routes", routes)
+
+		c.Next()
+
+	}
+}
+
 func main() {
 
 	type Note struct {
@@ -44,6 +57,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	router.Use(SetBluemixRegion(appEnv))
 
 	cloudantService, err := appEnv.Services.WithName("cloudant-go-cloudant")
 	if err != nil {
