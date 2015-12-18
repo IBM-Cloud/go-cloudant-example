@@ -9,6 +9,10 @@ applications:
   instances: 1
   name: go-cloudant
   host: go-cloudant
+  domain:
+    - mybluemix.net
+    - eu-gb.mybluemix.net
+    - ay-syd.mybluemix.net
   disk_quota: 1024M
   command: go-cloudant
   buildpack: https://github.com/cloudfoundry/go-buildpack.git
