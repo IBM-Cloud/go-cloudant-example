@@ -14,8 +14,7 @@ env:
 before_deploy: npm install -g cf-blue-green
 deploy:
   provider: script
-  script:
-    -export CF_API=https://api.ng.bluemix.net && export B_DOMAIN=mybluemix.net && cf-blue-green-travis && export CF_API=https://api.eu-gb.bluemix.net && export B_DOMAIN=eu-gb.mybluemix.net && cf-blue-green-travis && export CF_API=https://api.au-syd.bluemix.net && export B_DOMAIN=au-syd.mybluemix.net && cf-blue-green-travis
+  script: export CF_API=https://api.ng.bluemix.net && export B_DOMAIN=mybluemix.net && cf-blue-green-travis && export CF_API=https://api.eu-gb.bluemix.net && export B_DOMAIN=eu-gb.mybluemix.net && cf-blue-green-travis && export CF_API=https://api.au-syd.bluemix.net && export B_DOMAIN=au-syd.mybluemix.net && cf-blue-green-travis
   on:
     branch: master
     repo: IBM-Bluemix/go-cloudant
