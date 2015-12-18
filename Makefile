@@ -8,9 +8,6 @@ install: prepare
 
 prepare:
 	bower install --config.interactive=false --allow-root
-	pwd
-	ls -lah
-	ls -lah public/vendor
 	go get github.com/tools/godep
 
 build: prepare
