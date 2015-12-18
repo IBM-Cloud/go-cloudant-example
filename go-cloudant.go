@@ -99,7 +99,7 @@ func main() {
 			log.Println(err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to fetch docs"})
 		} else {
-			c.Header("Surrogate-Contro", "no-cache")
+			c.Header("Surrogate-Control", "no-cache")
 			c.Header("Cache-Control", "no-cache")
 			c.JSON(200, result)
 		}
