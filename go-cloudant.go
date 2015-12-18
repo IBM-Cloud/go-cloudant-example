@@ -16,13 +16,13 @@ import (
 func SetBluemixRegion(appEnv *cfenv.App) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		routes := ""
+
 		for _, route := range appEnv.ApplicationURIs {
 			routes += route + ","
 		}
+
 		c.Header("Routes", routes)
-
 		c.Next()
-
 	}
 }
 
@@ -99,6 +99,7 @@ func main() {
 			log.Println(err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to fetch docs"})
 		} else {
+			c.Header("Surrogate-Contro", "no-cache")
 			c.Header("Cache-Control", "no-cache")
 			c.JSON(200, result)
 		}
@@ -107,14 +108,14 @@ func main() {
 
 	router.POST("/submit", func(c *gin.Context) {
 		var form Note
-		// This will infer what binder to use depending on the content-type header.
 		if c.Bind(&form) == nil {
-
 			id := uuid.New()
+
 			_, err := cloudant.DB(dbName).Put(id, form, "")
 			if err != nil {
 				log.Println(err)
 			}
+
 			c.String(http.StatusOK, "Submitted note")
 		}
 	})
