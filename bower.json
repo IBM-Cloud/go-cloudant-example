@@ -4,7 +4,7 @@
   "private": false,
   "ignore": [
     "**/.*",
-    "./public/vendor"
+    "./public"
   ],
   "dependencies": {
     "bootstrap": "*",
