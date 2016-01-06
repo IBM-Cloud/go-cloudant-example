@@ -21,7 +21,7 @@ func SetBluemixRegion(appEnv *cfenv.App) gin.HandlerFunc {
 			routes += route + ","
 		}
 
-		c.Header("Routes", routes)
+		c.Header("X-Routes", routes)
 		c.Next()
 	}
 }
@@ -99,8 +99,6 @@ func main() {
 			log.Println(err)
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "unable to fetch docs"})
 		} else {
-			c.Header("Surrogate-Control", "no-cache")
-			c.Header("Cache-Control", "no-cache")
 			c.JSON(200, result)
 		}
 
