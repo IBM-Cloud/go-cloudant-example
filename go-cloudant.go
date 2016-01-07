@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/pborman/uuid"
+	"github.com/sethvargo/go-fastly"
 	"log"
 	"net/http"
 	"os"
@@ -40,6 +41,9 @@ func main() {
 	}
 
 	dbName := "go-cloudant"
+
+	var fastlyClient *fastly.Client
+	fastlyServiceId := os.Getenv("FASTLY_SERVICE_ID")
 
 	//remove the following line to not have your deployment tracker
 	cf_deployment_tracker.Track()
@@ -75,6 +79,14 @@ func main() {
 	//ensure db exists
 	//if the db exists the db will be returned anyway
 	cloudant.CreateDB(dbName)
+
+	//look for fastly if envar is set
+	if os.Getenv("FASTLY_API_KEY") != "" {
+		fastlyClient, err = fastly.NewClient("YOUR_FASTLY_API_KEY")
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
@@ -112,9 +124,12 @@ func main() {
 			_, err := cloudant.DB(dbName).Put(id, form, "")
 			if err != nil {
 				log.Println(err)
+				c.String(http.StatusBadRequest, err.Error())
+			} else {
+				fastlyClient.PurgeAll(&fastly.PurgeAllInput{Service: fastlyServiceId})
+				c.String(http.StatusOK, "Submitted note")
 			}
 
-			c.String(http.StatusOK, "Submitted note")
 		}
 	})
 
