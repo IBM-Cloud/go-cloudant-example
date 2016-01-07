@@ -126,8 +126,10 @@ func main() {
 				log.Println(err)
 				c.String(http.StatusBadRequest, err.Error())
 			} else {
-				fastlyClient.PurgeAll(&fastly.PurgeAllInput{Service: fastlyServiceId})
 				c.String(http.StatusOK, "Submitted note")
+				if fastlyClient != nil {
+					fastlyClient.PurgeAll(&fastly.PurgeAllInput{Service: fastlyServiceId})
+				}
 			}
 
 		}
