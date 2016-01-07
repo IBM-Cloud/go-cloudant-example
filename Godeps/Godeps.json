@@ -1,6 +1,6 @@
 {
 	"ImportPath": "go-cloudant",
-	"GoVersion": "go1.4.2",
+	"GoVersion": "go1.5.2",
 	"Deps": [
 		{
 			"ImportPath": "github.com/IBM-Bluemix/cf_deployment_tracker_client_go",
