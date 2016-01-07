@@ -82,7 +82,7 @@ func main() {
 
 	//look for fastly if envar is set
 	if os.Getenv("FASTLY_API_KEY") != "" {
-		fastlyClient, err = fastly.NewClient("YOUR_FASTLY_API_KEY")
+		fastlyClient, err = fastly.NewClient(os.Getenv("FASTLY_API_KEY"))
 		if err != nil {
 			log.Fatal(err)
 		}
