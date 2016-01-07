@@ -42,9 +42,6 @@ func main() {
 
 	dbName := "go-cloudant"
 
-	var fastlyClient *fastly.Client
-	fastlyServiceId := os.Getenv("FASTLY_SERVICE_ID")
-
 	//remove the following line to not have your deployment tracker
 	cf_deployment_tracker.Track()
 
@@ -81,6 +78,9 @@ func main() {
 	cloudant.CreateDB(dbName)
 
 	//look for fastly if envar is set
+	var fastlyClient *fastly.Client
+	fastlyServiceId := os.Getenv("FASTLY_SERVICE_ID")
+
 	if os.Getenv("FASTLY_API_KEY") != "" {
 		fastlyClient, err = fastly.NewClient(os.Getenv("FASTLY_API_KEY"))
 		if err != nil {
@@ -128,7 +128,13 @@ func main() {
 			} else {
 				c.String(http.StatusOK, "Submitted note")
 				if fastlyClient != nil {
-					fastlyClient.PurgeAll(&fastly.PurgeAllInput{Service: fastlyServiceId})
+					_, err := fastlyClient.PurgeAll(&fastly.PurgeAllInput{Service: fastlyServiceId})
+					if err != nil {
+						log.Println("Unable to purge cache")
+						log.Println(err)
+					} else {
+						log.Println("cleared cache")
+					}
 				}
 			}
 
